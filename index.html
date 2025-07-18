@@ -140,4 +140,43 @@
     <div class="materia" id="formulacionproy">Formulación y Evaluación de Proyectos</div>
     <div class="materia bloqueada" id="habildir" data-req="comportorg">Habilidades Directivas</div>
     <div class="materia" id="gestoper">Gestión de Operaciones y Procesos</div>
-    <div class="materia" id="gestorgsocial">Gestión de Organizacio
+    <div class="materia" id="gestorgsocial">Gestión de Organizaciones Sociales</div>
+  </div>
+
+  <div class="nivel">
+    <h2>Nivel 900</h2>
+    <div class="materia" id="gestestratorg">Gestión Estratégica de Organizaciones</div>
+    <div class="materia bloqueada" id="innosocial" data-req="fundempr">Innovación Social y Emprendimiento</div>
+    <div class="materia" id="controlgest">Control de Gestión</div>
+    <div class="materia" id="eticaorg">Ética en las Organizaciones</div>
+    <div class="materia" id="optativo1">Optativo</div>
+    <div class="materia" id="optativo2">Optativo</div>
+  </div>
+
+  <div class="nivel">
+    <h2>Nivel 1000</h2>
+    <div class="materia" id="practicaprof">Práctica Profesional</div>
+    <div class="materia" id="graduacion">Actividad de Graduación: Juego de Negocios</div>
+  </div>
+</div>
+
+<script>
+const materias = document.querySelectorAll('.materia');
+materias.forEach(materia => {
+  materia.addEventListener('click', () => {
+    if (materia.classList.contains('bloqueada')) return;
+    materia.classList.toggle('completada');
+    materias.forEach(m => {
+      const req = m.getAttribute('data-req');
+      if (req) {
+        const reqs = req.split(',');
+        const allOk = reqs.every(id => document.getElementById(id).classList.contains('completada'));
+        if (allOk) { m.classList.remove('bloqueada'); }
+        else { m.classList.add('bloqueada'); m.classList.remove('completada'); }
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
